@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Game2048.Infrastructure.Core;
 using Cysharp.Threading.Tasks;
 using Game2048.Gameplay.Board;
 using Game2048.Gameplay.Cubes.AutoMerge;
@@ -13,19 +12,22 @@ using Zenject;
 
 namespace Game2048.Gameplay.Cubes
 {
-    public class CubeController : ICubeController, IInitializable, IDisposable
+    public class CubeController : IDisposable
     {
         private readonly CubePool _pool;
-        private readonly BoardService _boardService;
         private readonly GameSettings _settings;
         private readonly SignalBus _signalBus;
-        private readonly ParticleSystem _autoMergeVFXPrefab;
-        private readonly AudioService _audioService;
+        private readonly CubeRegistry _registry;
+        private readonly CubeSpawner _spawner;
+        private readonly CubeMergeService _mergeService;
+        private readonly AutoMergeService _autoMergeService;
 
-        private CubeRegistry _registry;
-        private CubeSpawner _spawner;
-        private CubeMergeService _mergeService;
-        private AutoMergeService _autoMergeService;
+        public event Action<CubeView> OnMergeCompleted;
+
+        public IReadOnlyList<CubeView> ActiveCubes => _registry.ActiveCubes;
+        public CubeView CurrentCube { get; private set; }
+        public CubeView LastLaunchedCube { get; private set; }
+        public bool IsAutoMergeRunning => _autoMergeService.IsRunning;
 
         [Inject]
         public CubeController(
@@ -37,46 +39,31 @@ namespace Game2048.Gameplay.Cubes
             AudioService audioService)
         {
             _pool = pool;
-            _boardService = boardService;
             _settings = settings;
             _signalBus = signalBus;
-            _autoMergeVFXPrefab = autoMergeVFXPrefab;
-            _audioService = audioService;
-        }
 
-        public event Action<CubeView> OnMergeCompleted;
+            _registry = new CubeRegistry();
+            _spawner = new CubeSpawner(_pool, _settings, boardService, _registry);
+            _mergeService = new CubeMergeService(_settings, _signalBus, audioService);
+            _mergeService.Initialize();
 
-        public IReadOnlyList<CubeView> ActiveCubes => _registry.ActiveCubes;
-        public CubeView CurrentCube { get; private set; }
-        public CubeView LastLaunchedCube { get; private set; }
-        public bool IsAutoMergeRunning => _autoMergeService.IsRunning;
+            var vfxPlayer = new MergeVFXPlayer(autoMergeVFXPrefab, _settings);
+            _autoMergeService = new AutoMergeService(vfxPlayer, new AutoMergeAnimator(), _settings, _signalBus, audioService);
 
-        public void Initialize()
-        {
             _signalBus.Subscribe<MergeCompletedSignal>(HandleMergeCompleted);
-            BuildSubsystems();
         }
 
         public void Dispose()
         {
             _signalBus.TryUnsubscribe<MergeCompletedSignal>(HandleMergeCompleted);
-            _mergeService?.Dispose();
-        }
-
-        private void HandleMergeCompleted(MergeCompletedSignal signal)
-        {
-            OnMergeCompleted?.Invoke(signal.ResultCube);
+            _mergeService.Dispose();
         }
 
         public void Restart()
         {
             _spawner.DespawnAll();
-            _mergeService?.Dispose();
-
             CurrentCube = null;
             LastLaunchedCube = null;
-
-            BuildSubsystems();
         }
 
         public CubeView Spawn()
@@ -117,17 +104,9 @@ namespace Game2048.Gameplay.Cubes
             await _autoMergeService.ExecuteAutoMergeAsync(a, b, ct);
         }
 
-        private void BuildSubsystems()
+        private void HandleMergeCompleted(MergeCompletedSignal signal)
         {
-            _registry = new CubeRegistry();
-            _spawner = new CubeSpawner(_pool, _settings, _boardService, _registry);
-
-            _mergeService = new CubeMergeService(_settings, _signalBus, _audioService);
-            _mergeService.Initialize();
-
-            var vfxPlayer = new MergeVFXPlayer(_autoMergeVFXPrefab, _settings);
-            var animator = new AutoMergeAnimator();
-            _autoMergeService = new AutoMergeService(vfxPlayer, animator, _settings, _signalBus, _audioService);
+            OnMergeCompleted?.Invoke(signal.ResultCube);
         }
     }
 }

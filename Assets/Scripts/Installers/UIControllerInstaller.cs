@@ -16,7 +16,7 @@ namespace Game2048.Installers
             Container.BindInstance(_gameUI).AsSingle();
             Container.BindInstance(_gameOverUI).AsSingle();
             Container.Bind<UIController>().AsSingle();
-            Container.BindInterfacesTo<UIMediator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<UIMediator>().AsSingle();
         }
     }
 }

@@ -5,10 +5,10 @@ namespace Game2048.Gameplay.GameFlow
 {
     public class GameOverDetector
     {
-        private readonly ICubeController _cubeController;
+        private readonly CubeController _cubeController;
         private readonly BoardService _boardService;
 
-        public GameOverDetector(ICubeController cubeController, BoardService boardService)
+        public GameOverDetector(CubeController cubeController, BoardService boardService)
         {
             _cubeController = cubeController;
             _boardService = boardService;
@@ -17,7 +17,7 @@ namespace Game2048.Gameplay.GameFlow
         public bool CheckGameOver()
         {
             var cubes = _cubeController.ActiveCubes;
-            for (int i = 0; i < cubes.Count; i++)
+            for (var i = 0; i < cubes.Count; i++)
             {
                 var cube = cubes[i];
                 if (cube == null || !cube.Data.IsLaunched)

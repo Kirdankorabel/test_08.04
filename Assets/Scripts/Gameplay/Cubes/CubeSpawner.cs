@@ -33,7 +33,7 @@ namespace Game2048.Gameplay.Cubes
 
         public CubeView Spawn()
         {
-            int value = Random.value < _settings.SpawnChanceOf2 ? 2 : 4;
+            var value = Random.value < _settings.SpawnChanceOf2 ? 2 : 4;
             var cube = _pool.Spawn(value);
 
             cube.transform.position = _boardService.GetSpawnPosition();

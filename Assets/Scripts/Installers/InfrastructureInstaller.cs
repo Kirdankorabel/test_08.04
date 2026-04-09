@@ -1,7 +1,6 @@
 using Game2048.Gameplay.Board;
 using Game2048.Gameplay.Cubes;
 using Game2048.Infrastructure.Audio;
-using Game2048.Infrastructure.Input;
 using Game2048.Infrastructure.Launch;
 using UnityEngine;
 using Zenject;
@@ -16,7 +15,6 @@ namespace Game2048.Installers
         public override void InstallBindings()
         {
             Container.Bind<AudioService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<TouchInputService>().AsSingle();
             Container.Bind<LaunchService>().AsSingle();
             Container.Bind<BoardService>().AsSingle();
 

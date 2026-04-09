@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game2048.Gameplay.Scores
 {
-    public class ScoreService : IInitializable, IDisposable
+    public class ScoreService : IDisposable
     {
         private const string BestScoreKey = "BestScore";
 
@@ -18,15 +18,11 @@ namespace Game2048.Gameplay.Scores
         public ScoreService(SignalBus signalBus)
         {
             _signalBus = signalBus;
+            _signalBus.Subscribe<MergeCompletedSignal>(OnMergeCompleted);
         }
 
         public int CurrentScore => _currentScore;
         public int BestScore => PlayerPrefs.GetInt(BestScoreKey, 0);
-
-        public void Initialize()
-        {
-            _signalBus.Subscribe<MergeCompletedSignal>(OnMergeCompleted);
-        }
 
         public void Dispose()
         {

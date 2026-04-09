@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5925611929064123166}
   - component: {fileID: 4768290136110922056}
   - component: {fileID: 3956667684470051411}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 8758150418303221327}
   - component: {fileID: 1896786931242476142}
   - component: {fileID: 3710890686627753933}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 665907998928491679}
   - component: {fileID: 2409122119646100209}
   - component: {fileID: 2733129565533123413}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 4010519652870079903}
   - component: {fileID: 4188112507486935891}
   - component: {fileID: 2750643900593721066}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 7644901544796212657}
   - component: {fileID: 7348175339031600336}
   - component: {fileID: 8492392338738988697}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3712426049623203367}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 2388806310888016464}
   - component: {fileID: 3780463397947737344}
   - component: {fileID: 6182756473107116834}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CubePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 8834205272790843518}
   - component: {fileID: 1866909158785711505}
   - component: {fileID: 2650280038987140209}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 2806081458205443057}
   - component: {fileID: 3709035092572298491}
   - component: {fileID: 6901034362420763890}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

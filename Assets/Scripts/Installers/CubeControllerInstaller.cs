@@ -7,7 +7,7 @@ namespace Game2048.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<CubeController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CubeController>().AsSingle();
         }
     }
 }

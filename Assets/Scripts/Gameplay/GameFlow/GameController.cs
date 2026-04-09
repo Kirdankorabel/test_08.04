@@ -4,7 +4,6 @@ using Game2048.Gameplay.GameFlow.States;
 using Game2048.Gameplay.Scores;
 using Game2048.Gameplay.UI;
 using Game2048.Infrastructure.Core;
-using Game2048.Infrastructure.Input;
 using Game2048.Infrastructure.Launch;
 using Zenject;
 
@@ -12,10 +11,9 @@ namespace Game2048.Gameplay.GameFlow
 {
     public class GameController : ITickable, IGameStateListener
     {
-        private readonly TouchInputService _inputService;
         private readonly LaunchService _launchService;
         private readonly BoardService _boardService;
-        private readonly ICubeController _cubeController;
+        private readonly CubeController _cubeController;
         private readonly ScoreService _scoreService;
         private readonly UIController _uiController;
         private readonly GameSettings _settings;
@@ -25,15 +23,13 @@ namespace Game2048.Gameplay.GameFlow
 
         [Inject]
         public GameController(
-            TouchInputService inputService,
             LaunchService launchService,
             BoardService boardService,
-            ICubeController cubeController,
+            CubeController cubeController,
             ScoreService scoreService,
             UIController uiController,
             GameSettings settings)
         {
-            _inputService = inputService;
             _launchService = launchService;
             _boardService = boardService;
             _cubeController = cubeController;
@@ -73,7 +69,6 @@ namespace Game2048.Gameplay.GameFlow
             _cubeController.Restart();
             BuildStateMachine();
             _cubeController.Spawn();
-            _inputService.ResetState();
             _stateMachine.ChangeState(GameState.WaitingForInput);
         }
 
@@ -105,9 +100,9 @@ namespace Game2048.Gameplay.GameFlow
             _stateMachine.AddListener(_uiController);
 
             _stateMachine.AddState(GameState.WaitingForInput,
-                new WaitingForInputState(_inputService));
+                new WaitingForInputState());
             _stateMachine.AddState(GameState.Dragging,
-                new DraggingState(_cubeController, _inputService, _launchService, _boardService, _settings));
+                new DraggingState(_cubeController, _launchService, _boardService, _settings));
             _stateMachine.AddState(GameState.Launched,
                 new LaunchedState(_cubeController, _gameOverDetector));
             _stateMachine.AddState(GameState.AutoMerging,

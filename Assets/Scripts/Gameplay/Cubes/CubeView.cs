@@ -53,20 +53,17 @@ namespace Game2048.Gameplay.Cubes
 
         private void UpdateVisuals()
         {
-            string text = Data.Po2Value.ToString();
+            var text = Data.Po2Value.ToString();
 
-            for (int i = 0; i < _faceLabels.Length; i++)
+            for (var i = 0; i < _faceLabels.Length; i++)
             {
                 if (_faceLabels[i] != null)
                     _faceLabels[i].text = text;
             }
-
-            if (_renderer != null)
-            {
-                var block = new MaterialPropertyBlock();
-                block.SetColor("_Color", _settings.GetColorForValue(Data.Po2Value));
-                _renderer.SetPropertyBlock(block);
-            }
+            
+            var block = new MaterialPropertyBlock();
+            block.SetColor("_Color", _settings.GetColorForValue(Data.Po2Value));
+            _renderer.SetPropertyBlock(block);
         }
     }
 }

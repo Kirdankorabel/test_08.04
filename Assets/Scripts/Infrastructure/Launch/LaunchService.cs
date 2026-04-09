@@ -20,6 +20,9 @@ namespace Game2048.Infrastructure.Launch
 
         public void Launch(CubeView cube)
         {
+            if (cube == null)
+                return;
+
             cube.Rigidbody.isKinematic = false;
             cube.Rigidbody.AddForce(Vector3.forward * _settings.LaunchForce, ForceMode.Impulse);
             _audioService.PlayLaunch();

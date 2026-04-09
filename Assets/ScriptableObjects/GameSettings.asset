@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a9fe3cc988b040899866006a16e4d, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  _boardLength: 12
   _boardWidth: 6
-  _wallHeight: 10
   _spawnPosition: {x: 0, y: 0.5, z: -4.5}
   _spawnChanceOf2: 0.75
   _launchForce: 20
   _dragSensitivity: 0.01
-  _minMergeImpulse: 7
+  _minMergeImpulse: 3
   _mergePopForce: 9
   _collisionBounceForce: 1.5
   _settleVelocityThreshold: 0.05
@@ -30,13 +28,13 @@ MonoBehaviour:
   _overflowLineZ: -4
   _cubeColors:
   - {r: 0.65, g: 0.85, b: 0.95, a: 1}
-  - {r: 0.40, g: 0.90, b: 0.70, a: 1}
+  - {r: 0.4, g: 0.9, b: 0.7, a: 1}
   - {r: 0.95, g: 0.85, b: 0.25, a: 1}
-  - {r: 0.95, g: 0.60, b: 0.20, a: 1}
-  - {r: 0.90, g: 0.30, b: 0.25, a: 1}
-  - {r: 0.85, g: 0.20, b: 0.50, a: 1}
+  - {r: 0.95, g: 0.6, b: 0.2, a: 1}
+  - {r: 0.9, g: 0.3, b: 0.25, a: 1}
+  - {r: 0.85, g: 0.2, b: 0.5, a: 1}
   - {r: 0.65, g: 0.25, b: 0.85, a: 1}
-  - {r: 0.30, g: 0.40, b: 0.95, a: 1}
-  - {r: 0.15, g: 0.80, b: 0.85, a: 1}
-  - {r: 0.55, g: 0.90, b: 0.20, a: 1}
-  - {r: 1.00, g: 0.84, b: 0.00, a: 1}
+  - {r: 0.3, g: 0.4, b: 0.95, a: 1}
+  - {r: 0.15, g: 0.8, b: 0.85, a: 1}
+  - {r: 0.55, g: 0.9, b: 0.2, a: 1}
+  - {r: 1, g: 0.84, b: 0, a: 1}

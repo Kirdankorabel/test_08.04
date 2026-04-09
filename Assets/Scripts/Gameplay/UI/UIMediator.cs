@@ -8,12 +8,12 @@ using Zenject;
 
 namespace Game2048.Gameplay.UI
 {
-    public class UIMediator : IInitializable, IDisposable
+    public class UIMediator : IDisposable
     {
         private readonly UIController _uiController;
         private readonly GameController _gameController;
         private readonly ScoreService _scoreService;
-        private readonly ICubeController _cubeController;
+        private readonly CubeController _cubeController;
 
         private CancellationTokenSource _autoMergeCts;
 
@@ -22,16 +22,13 @@ namespace Game2048.Gameplay.UI
             UIController uiController,
             GameController gameController,
             ScoreService scoreService,
-            ICubeController cubeController)
+            CubeController cubeController)
         {
             _uiController = uiController;
             _gameController = gameController;
             _scoreService = scoreService;
             _cubeController = cubeController;
-        }
 
-        public void Initialize()
-        {
             _uiController.OnPlayClicked += OnPlay;
             _uiController.OnRestartClicked += OnRestart;
             _uiController.OnExitClicked += OnExit;

@@ -1,13 +1,12 @@
-using System;
 using Game2048.Gameplay.Cubes;
-using Game2048.Infrastructure.Core;
+using System;
 using UnityEngine;
 
 namespace Game2048.Gameplay.GameFlow.States
 {
     public class LaunchedState : IGameState
     {
-        private readonly ICubeController _cubeController;
+        private readonly CubeController _cubeController;
         private readonly GameOverDetector _gameOverDetector;
 
         private CubeView _trackedCube;
@@ -17,7 +16,7 @@ namespace Game2048.Gameplay.GameFlow.States
         public event Action<GameState> OnStateChangeRequested;
 
         public LaunchedState(
-            ICubeController cubeController,
+            CubeController cubeController,
             GameOverDetector gameOverDetector)
         {
             _cubeController = cubeController;

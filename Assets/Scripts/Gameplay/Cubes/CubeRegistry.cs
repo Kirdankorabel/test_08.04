@@ -26,13 +26,13 @@ namespace Game2048.Gameplay.Cubes
 
             var valueMap = new Dictionary<int, CubeView>();
 
-            for (int i = 0; i < _cubes.Count; i++)
+            for (var i = 0; i < _cubes.Count; i++)
             {
                 var cube = _cubes[i];
                 if (cube == null || cube.Data.IsPendingMerge || !cube.Data.IsLaunched)
                     continue;
 
-                int value = cube.Data.Po2Value;
+                var value = cube.Data.Po2Value;
 
                 if (valueMap.TryGetValue(value, out var existing))
                 {
